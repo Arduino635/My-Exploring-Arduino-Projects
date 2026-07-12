@@ -159,6 +159,63 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        .featured-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid #ffd700;
+        }
+
+        .featured-section h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .featured-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .featured-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .featured-card p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .featured-card .project-status {
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .featured-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .featured-link:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -178,6 +235,23 @@
                 Each project focuses on a specific learning goal: from simple LED control to sensor integration, 
                 serial communication, and automation logic. Browse the projects below to see what's been explored!
             </p>
+        </section>
+
+        <section class="featured-section">
+            <h2>⭐ Featured Project: Final Chapter</h2>
+            <div class="featured-card">
+                <h3>7-Segment Display Digital Clock</h3>
+                <p>
+                    The culmination of the learning journey! This project combines everything learned:
+                    controlling multiple 7-segment LED displays with an Arduino to create a fully functional 
+                    digital clock. Features precise timing, multi-digit display control, and real-time updates.
+                </p>
+                <span class="project-status status-completed">✓ Completed</span>
+                <br>
+                <a href="https://www.youtube.com/post/UgkxvhTs0TzN3T6Y9rMQih1jMn10atsQtq2a" target="_blank" class="featured-link">
+                    📹 Watch on YouTube
+                </a>
+            </div>
         </section>
 
         <section class="projects-section">
