@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Exploring Arduino Projects</title>
+    <title>Exploring Arduino Projects</title>
     <style>
         * {
             margin: 0;
@@ -19,14 +19,14 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
             color: white;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             padding-top: 20px;
         }
 
@@ -37,8 +37,20 @@
         }
 
         header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        header small {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        header small a {
+            color: white;
+            text-decoration: none;
         }
 
         .about-section {
@@ -52,7 +64,6 @@
         .about-section h2 {
             color: #667eea;
             margin-bottom: 15px;
-            font-size: 1.5rem;
         }
 
         .about-section p {
@@ -61,59 +72,148 @@
             margin-bottom: 10px;
         }
 
-        .projects-section {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .projects-section h2 {
-            color: #667eea;
-            margin-bottom: 25px;
-            font-size: 1.5rem;
-        }
-
-        .projects-grid {
+        .chapters-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
+            margin-bottom: 40px;
         }
 
-        .project-card {
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
+        .chapter {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
             cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
         }
 
-        .project-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
-            transform: translateY(-5px);
+        .chapter-header:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
         }
 
-        .project-card h3 {
+        .chapter-header h3 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .chapter-number {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .chapter.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .chapter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .chapter.expanded .chapter-content {
+            max-height: 2000px;
+            padding: 20px;
+        }
+
+        .chapter-description {
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .parts-list {
+            margin-bottom: 20px;
+        }
+
+        .parts-list h4 {
             color: #667eea;
             margin-bottom: 10px;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
-        .project-card p {
+        .parts-list ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .parts-list li {
+            color: #555;
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .parts-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        .projects-in-chapter {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .projects-in-chapter h5 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .project-item {
+            background: white;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+
+        .project-item.completed {
+            border-left-color: #28a745;
+        }
+
+        .project-name {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .project-description {
+            font-size: 0.9rem;
             color: #666;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            margin-top: 5px;
         }
 
         .project-status {
             display: inline-block;
-            margin-top: 10px;
-            padding: 5px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: bold;
+            margin-top: 8px;
         }
 
         .status-planned {
@@ -121,31 +221,46 @@
             color: #856404;
         }
 
-        .status-in-progress {
-            background: #cfe2ff;
-            color: #084298;
-        }
-
         .status-completed {
             background: #d1e7dd;
             color: #0f5132;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #999;
+        .status-in-progress {
+            background: #cfe2ff;
+            color: #084298;
         }
 
-        .empty-state p {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+        .tutorial-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tutorial-link:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .featured-badge {
+            background: #ffd700;
+            color: #333;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 8px;
         }
 
         footer {
             text-align: center;
             color: white;
-            margin-top: 50px;
             padding: 20px;
             opacity: 0.9;
         }
@@ -159,140 +274,30 @@
         footer a:hover {
             text-decoration: underline;
         }
-
-        .featured-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 3px solid #ffd700;
-        }
-
-        .featured-section h2 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            text-align: center;
-        }
-
-        .featured-card {
-            background: white;
-            border-radius: 8px;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .featured-card h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-
-        .featured-card p {
-            color: #333;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .featured-card .project-status {
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .featured-link {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .featured-link:hover {
-            background: #764ba2;
-            transform: scale(1.05);
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🔧 My Exploring Arduino Projects</h1>
-            <p>Hands-on learning through electronics and embedded programming</p>
+            <h1>🔧 Exploring Arduino Projects</h1>
+            <p>Hands-on learning through the "Exploring Arduino, 2nd Edition" curriculum</p>
+            <small>Based on: <a href="https://github.com/sciguy14/Exploring-Arduino-2nd-Edition" target="_blank">github.com/sciguy14/Exploring-Arduino-2nd-Edition</a></small>
         </header>
 
         <section class="about-section">
-            <h2>About This Collection</h2>
+            <h2>📚 About This Learning Journey</h2>
             <p>
-                Welcome to my Arduino projects repository! This is a collection of experiments and builds 
-                created while learning Arduino programming, electronics fundamentals, and sensor/actuator control.
+                This project collection follows the structure of "Exploring Arduino, 2nd Edition" - a comprehensive guide 
+                to Arduino programming and electronics. Each chapter contains specific projects, parts lists, and learning objectives.
             </p>
             <p>
-                Each project focuses on a specific learning goal: from simple LED control to sensor integration, 
-                serial communication, and automation logic. Browse the projects below to see what's been explored!
+                Navigate through the chapters below to explore circuits, code examples, and hands-on experiments. 
+                Each chapter builds upon the previous, progressing from basic digital I/O to advanced wireless communication.
             </p>
         </section>
 
-        <section class="featured-section">
-            <h2>⭐ Featured Project: Final Chapter</h2>
-            <div class="featured-card">
-                <h3>7-Segment Display Digital Clock</h3>
-                <p>
-                    The culmination of the learning journey! This project combines everything learned:
-                    controlling multiple 7-segment LED displays with an Arduino to create a fully functional 
-                    digital clock. Features precise timing, multi-digit display control, and real-time updates.
-                </p>
-                <span class="project-status status-completed">✓ Completed</span>
-                <br>
-                <a href="https://www.youtube.com/post/UgkxvhTs0TzN3T6Y9rMQih1jMn10atsQtq2a" target="_blank" class="featured-link">
-                    📹 Watch on YouTube
-                </a>
-            </div>
-        </section>
-
-        <section class="projects-section">
-            <h2>📋 Projects</h2>
-            <div class="projects-grid" id="projectsGrid">
-                <div class="project-card">
-                    <h3>Blink LED</h3>
-                    <p>The classic Arduino starter project. Learn to control an LED by turning it on and off at intervals.</p>
-                    <span class="project-status status-planned">Planned</span>
-                </div>
-
-                <div class="project-card">
-                    <h3>Button Input</h3>
-                    <p>Read digital input from a push button and respond by toggling an LED.</p>
-                    <span class="project-status status-planned">Planned</span>
-                </div>
-
-                <div class="project-card">
-                    <h3>Potentiometer LED Dimmer</h3>
-                    <p>Use an analog potentiometer to control the brightness of an LED via PWM.</p>
-                    <span class="project-status status-planned">Planned</span>
-                </div>
-
-                <div class="project-card">
-                    <h3>Ultrasonic Distance Meter</h3>
-                    <p>Measure distance using an ultrasonic sensor and display results on the serial monitor.</p>
-                    <span class="project-status status-planned">Planned</span>
-                </div>
-
-                <div class="project-card">
-                    <h3>Servo Motor Sweep</h3>
-                    <p>Control a servo motor to sweep through angles. Great for understanding PWM signals.</p>
-                    <span class="project-status status-planned">Planned</span>
-                </div>
-
-                <div class="project-card">
-                    <h3>Temperature Sensor Monitor</h3>
-                    <p>Read temperature data from a sensor and log it to the serial monitor.</p>
-                    <span class="project-status status-planned">Planned</span>
-                </div>
-            </div>
+        <section class="chapters-container" id="chaptersContainer">
+            <!-- Chapters will be inserted here by JavaScript -->
         </section>
 
         <footer>
@@ -300,5 +305,416 @@
             <p>&copy; 2026 Arduino Learning Projects</p>
         </footer>
     </div>
+
+    <script>
+        const chapters = [
+            {
+                number: 1,
+                title: "Getting Started and Understanding the Arduino Landscape",
+                description: "Introduction to Arduino boards, setup, and the Arduino IDE.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable (Type A to B for Uno, Type A to Micro-B for METRO)"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 2,
+                title: "Digital Inputs, Outputs, and Pulse-Width Modulation",
+                description: "Learn to control LEDs, read buttons, and use PWM for LED dimming.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Half-size or full-size breadboard",
+                    "Assorted jumper wires",
+                    "Pushbutton",
+                    "220Ω resistors (×3)",
+                    "10kΩ resistor",
+                    "5mm red LED",
+                    "5mm common-anode RGB LED"
+                ],
+                projects: [],
+                tutorial: "https://www.youtube.com/watch?v=fCxzA9_kg6s"
+            },
+            {
+                number: 3,
+                title: "Interfacing with Analog Sensors",
+                description: "Work with potentiometers, photoresistors, temperature sensors, and other analog inputs.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "220Ω resistors (×3)",
+                    "10kΩ resistors (×2)",
+                    "10kΩ trim potentiometer",
+                    "Photoresistor",
+                    "TMP36 analog temperature sensor",
+                    "Sharp GP2Y0A21YK0F IR distance sensor",
+                    "ADXL335/335/326 triple-axis accelerometer",
+                    "5mm white LED",
+                    "5mm common-anode RGB LED"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 4,
+                title: "Using Transistors and Driving DC Motors",
+                description: "Control power with transistors and build motor-driven robots.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "1kΩ resistor",
+                    "10kΩ resistors (×2)",
+                    "10kΩ trim potentiometer",
+                    "Photoresistors (×2)",
+                    "9V battery and battery clip",
+                    "L7805CV 5V voltage regulator",
+                    "10μF 50V electrolytic capacitors (×2)",
+                    "0.1μF ceramic capacitor",
+                    "1N4001 diode",
+                    "PN2222 NPN bipolar junction transistor",
+                    "Roving robot chassis kit with wheels and DC motors",
+                    "9V DC motor",
+                    "TI L293D dual H-bridge motor driver"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 5,
+                title: "Driving Stepper and Servo Motors",
+                description: "Control stepper motors for precision positioning and servo motors for angular control.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "Pushbuttons (×2)",
+                    "1kΩ resistors (×4)",
+                    "10kΩ trim potentiometer",
+                    "5mm Blue LEDs (×4)",
+                    "9V battery and battery clip",
+                    "L7805CV 5V voltage regulator",
+                    "10μF 50V electrolytic capacitors (×2)",
+                    "TI L293D dual H-bridge motor driver",
+                    "12V (>500mA) DC wall adapter",
+                    "Sharp GP2Y0A21YK0F IR distance sensor",
+                    "Standard 5V servo motor",
+                    "NEMA-17 bipolar stepper motor",
+                    "Hot glue or tape, Circular clock face, Binder clip, Popsicle stick"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 6,
+                title: "Making Sounds and Music",
+                description: "Generate tones, create music, and build sound-responsive circuits.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "Pushbuttons (×5)",
+                    "220Ω resistor",
+                    "10kΩ resistors (×5)",
+                    "10kΩ trim potentiometer",
+                    "8Ω loudspeaker"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 7,
+                title: "USB Serial Communication",
+                description: "Communicate between Arduino and computer via serial protocol.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "220Ω resistors (×3)",
+                    "10kΩ trim potentiometer",
+                    "5mm red LED",
+                    "5mm common-anode RGB LED"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 8,
+                title: "Emulating USB Devices",
+                description: "Make Arduino act as keyboard, mouse, or other USB devices.",
+                parts: [
+                    "Arduino Leonardo or Seeeduino Lite",
+                    "USB cable (Type A to Micro-B)",
+                    "Breadboard and jumper wires",
+                    "Pushbuttons (×3)",
+                    "220Ω resistor",
+                    "10kΩ resistors (×3)",
+                    "Photoresistor",
+                    "5mm red LED",
+                    "TMP36 analog temperature sensor",
+                    "Two-axis joystick"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 9,
+                title: "Shift Registers",
+                description: "Expand output pins using shift registers for controlling multiple LEDs.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "220Ω resistors (×8)",
+                    "5mm red LEDs (×8)",
+                    "5mm green LEDs (×4)",
+                    "5mm yellow LEDs (×3)",
+                    "Sharp GP2Y0A21YK0F IR distance sensor",
+                    "SN74HC595N shift register"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 10,
+                title: "The I2C Bus",
+                description: "Use the I2C protocol to communicate with multiple sensors and devices.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "220Ω resistors (×8)",
+                    "4.7kΩ resistors (×2)",
+                    "5mm red LED",
+                    "5mm green LEDs (×4)",
+                    "5mm yellow LEDs (×3)",
+                    "SN74HC595N shift register",
+                    "TC74A0-5.0VAT I2C temperature sensor"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 11,
+                title: "The SPI Bus and Third-Party Libraries",
+                description: "Master SPI communication and use community libraries.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "220Ω resistors (×4)",
+                    "5mm common-anode RGB LED",
+                    "Piezo buzzer",
+                    "Adafruit LIS3DH breakout board"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 12,
+                title: "Interfacing with Liquid Crystal Displays",
+                description: "Display text and data on character LCDs and create interactive menus.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "Pushbuttons (×2)",
+                    "220Ω resistor",
+                    "1kΩ resistor",
+                    "4.7kΩ resistors (×2)",
+                    "10kΩ resistors (×2)",
+                    "10kΩ trim potentiometer",
+                    "9V battery and battery clip",
+                    "L7805CV 5V voltage regulator",
+                    "10μF 50V electrolytic capacitors (×2)",
+                    "1N4001 diode",
+                    "PN2222 NPN bipolar junction transistor",
+                    "8Ω loudspeaker",
+                    "TC74A0-5.0VAT I2C temperature sensor",
+                    "Miniature 5V DC brushless cooling fan",
+                    "16×2 character LCD with header pins"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 13,
+                title: "Interrupts and Other Special Functions",
+                description: "Use interrupts for responsive event handling and explore advanced Arduino features.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "Pushbutton",
+                    "100Ω resistor",
+                    "220Ω resistors (×3)",
+                    "10kΩ resistor",
+                    "5mm Common-anode RGB LED",
+                    "10μF 50V electrolytic capacitor",
+                    "Piezo buzzer",
+                    "74AHCT14 hex inverting Schmitt trigger"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 14,
+                title: "Data Logging with SD Cards",
+                description: "Log sensor data to SD cards for long-term storage and analysis.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Assorted jumper wires",
+                    "Sharp GP2Y0A21YK0F IR distance sensor",
+                    "Adafruit Arduino data logging shield with header pins",
+                    "CR1220 12mm 3V coin cell battery",
+                    "SD/MicroSD Memory Card (8 GB SDHC recommended)",
+                    "5V 1A USB port wall power supply",
+                    "Computer with SD card reader"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 15,
+                title: "Wireless RF Communications",
+                description: "Build wireless control systems using RF remote controls and receivers.",
+                parts: [
+                    "Arduino Uno or Adafruit METRO 328",
+                    "USB cable",
+                    "Breadboard and jumper wires",
+                    "220Ω resistor",
+                    "Piezo buzzer",
+                    "5V 1A USB port wall power supply",
+                    "315 MHz momentary type RF receiver",
+                    "Single-button 315 MHz RF remote control",
+                    "Controllable power relay module",
+                    "AC lamp, Pocket screwdriver"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 16,
+                title: "Bluetooth Connectivity",
+                description: "Add Bluetooth capability to your projects and control them from smartphones.",
+                parts: [
+                    "Adafruit Feather 32u4 Bluefruit LE (pre-soldered)",
+                    "USB cable (Type A to Micro-B)",
+                    "Breadboard and jumper wires",
+                    "220Ω resistor",
+                    "10kΩ trim potentiometer",
+                    "5mm red LED",
+                    "5V 1A USB port wall power supply",
+                    "Controllable power relay module",
+                    "AC lamp, Pocket screwdriver",
+                    "BTLE-capable smartphone (iPhone or Android)"
+                ],
+                projects: [],
+                tutorial: ""
+            },
+            {
+                number: 17,
+                title: "Wi-Fi and the Cloud",
+                description: "Connect your Arduino to Wi-Fi networks and interact with cloud services.",
+                parts: [
+                    "Adafruit Feather M0 Wi-Fi w/ATWINC1500 (soldered w/ PCB antenna)",
+                    "USB cable (Type A to Micro-B)",
+                    "Breadboard and jumper wires",
+                    "220Ω resistors (×4)",
+                    "4.7kΩ resistors (×2)",
+                    "5mm common-anode RGB LED",
+                    "Piezo buzzer",
+                    "5V 1A USB port wall power supply",
+                    "4-digit 7-segment display with I2C backpack (1.2 inch or 0.56 inch)",
+                    "Wi-Fi network credentials"
+                ],
+                projects: [
+                    {
+                        name: "7-Segment Display Digital Clock",
+                        status: "completed",
+                        description: "The culmination of the learning journey! Control 7-segment LED displays to create a fully functional digital clock.",
+                        video: "https://www.youtube.com/post/UgkxvhTs0TzN3T6Y9rMQih1jMn10atsQtq2a",
+                        featured: true
+                    }
+                ],
+                tutorial: ""
+            }
+        ];
+
+        function renderChapters() {
+            const container = document.getElementById('chaptersContainer');
+            container.innerHTML = '';
+
+            chapters.forEach(chapter => {
+                const chapterEl = document.createElement('div');
+                chapterEl.className = 'chapter';
+                
+                let projectsHtml = '';
+                if (chapter.projects.length > 0) {
+                    projectsHtml = '<div class="projects-in-chapter"><h5>📌 Projects:</h5>';
+                    chapter.projects.forEach(project => {
+                        const statusClass = project.status === 'completed' ? 'status-completed' : 'status-planned';
+                        const badge = project.featured ? '<span class="featured-badge">⭐ FEATURED</span>' : '';
+                        const videoLink = project.video ? `<a href="${project.video}" target="_blank" class="tutorial-link">📹 Watch on YouTube</a>` : '';
+                        projectsHtml += `
+                            <div class="project-item ${project.status}">
+                                <div style="flex: 1;">
+                                    <div class="project-name">${project.name}${badge}</div>
+                                    <div class="project-description">${project.description}</div>
+                                    ${videoLink}
+                                </div>
+                                <span class="project-status ${statusClass}">${project.status === 'completed' ? '✓' : '○'}</span>
+                            </div>
+                        `;
+                    });
+                    projectsHtml += '</div>';
+                }
+
+                let partsHtml = '';
+                if (chapter.parts.length > 0) {
+                    partsHtml = '<div class="parts-list"><h4>📦 Parts List:</h4><ul>';
+                    chapter.parts.forEach(part => {
+                        partsHtml += `<li>${part}</li>`;
+                    });
+                    partsHtml += '</ul></div>';
+                }
+
+                let tutorialHtml = '';
+                if (chapter.tutorial) {
+                    tutorialHtml = `<a href="${chapter.tutorial}" target="_blank" class="tutorial-link">📺 View Tutorial</a>`;
+                }
+
+                chapterEl.innerHTML = `
+                    <div class="chapter-header" onclick="toggleChapter(this)">
+                        <div>
+                            <span class="chapter-number">Ch${String(chapter.number).padStart(2, '0')}</span>
+                            <h3 style="display: inline-block; margin-left: 15px;">${chapter.title}</h3>
+                        </div>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="chapter-content">
+                        <p class="chapter-description">${chapter.description}</p>
+                        ${partsHtml}
+                        ${projectsHtml}
+                        ${tutorialHtml}
+                    </div>
+                `;
+                
+                container.appendChild(chapterEl);
+            });
+        }
+
+        function toggleChapter(headerEl) {
+            const chapter = headerEl.closest('.chapter');
+            chapter.classList.toggle('expanded');
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', renderChapters);
+    </script>
 </body>
 </html>
