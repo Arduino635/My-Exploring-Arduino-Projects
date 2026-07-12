@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Exploring Arduino Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            padding-top: 20px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .about-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .about-section p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .projects-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .projects-section h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .project-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .project-status {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .status-planned {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-in-progress {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .status-completed {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding: 20px;
+            opacity: 0.9;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔧 My Exploring Arduino Projects</h1>
+            <p>Hands-on learning through electronics and embedded programming</p>
+        </header>
+
+        <section class="about-section">
+            <h2>About This Collection</h2>
+            <p>
+                Welcome to my Arduino projects repository! This is a collection of experiments and builds 
+                created while learning Arduino programming, electronics fundamentals, and sensor/actuator control.
+            </p>
+            <p>
+                Each project focuses on a specific learning goal: from simple LED control to sensor integration, 
+                serial communication, and automation logic. Browse the projects below to see what's been explored!
+            </p>
+        </section>
+
+        <section class="projects-section">
+            <h2>📋 Projects</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <div class="project-card">
+                    <h3>Blink LED</h3>
+                    <p>The classic Arduino starter project. Learn to control an LED by turning it on and off at intervals.</p>
+                    <span class="project-status status-planned">Planned</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>Button Input</h3>
+                    <p>Read digital input from a push button and respond by toggling an LED.</p>
+                    <span class="project-status status-planned">Planned</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>Potentiometer LED Dimmer</h3>
+                    <p>Use an analog potentiometer to control the brightness of an LED via PWM.</p>
+                    <span class="project-status status-planned">Planned</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>Ultrasonic Distance Meter</h3>
+                    <p>Measure distance using an ultrasonic sensor and display results on the serial monitor.</p>
+                    <span class="project-status status-planned">Planned</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>Servo Motor Sweep</h3>
+                    <p>Control a servo motor to sweep through angles. Great for understanding PWM signals.</p>
+                    <span class="project-status status-planned">Planned</span>
+                </div>
+
+                <div class="project-card">
+                    <h3>Temperature Sensor Monitor</h3>
+                    <p>Read temperature data from a sensor and log it to the serial monitor.</p>
+                    <span class="project-status status-planned">Planned</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>📚 Learning Arduino | 🌐 <a href="https://github.com/Arduino635/My-Exploring-Arduino-Projects" target="_blank">GitHub Repository</a></p>
+            <p>&copy; 2026 Arduino Learning Projects</p>
+        </footer>
+    </div>
+</body>
+</html>
