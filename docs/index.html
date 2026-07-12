@@ -13,14 +13,37 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: 
+                linear-gradient(0deg, transparent 24%, rgba(0, 150, 136, 0.05) 25%, rgba(0, 150, 136, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 150, 136, 0.05) 75%, rgba(0, 150, 136, 0.05) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(0, 150, 136, 0.05) 25%, rgba(0, 150, 136, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 150, 136, 0.05) 75%, rgba(0, 150, 136, 0.05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            background-color: #0d1b2a;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(33, 150, 243, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         header {
@@ -33,41 +56,53 @@
         header h1 {
             font-size: 3rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.8);
+            color: #00ff88;
+            font-weight: bold;
         }
 
         header p {
             font-size: 1.1rem;
-            opacity: 0.9;
+            opacity: 0.95;
             margin-bottom: 10px;
+            color: #00d9ff;
         }
 
         header small {
             display: block;
             font-size: 0.9rem;
-            opacity: 0.8;
+            opacity: 0.85;
+            color: #00d9ff;
         }
 
         header small a {
-            color: white;
+            color: #00ff88;
             text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        header small a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
         }
 
         .about-section {
-            background: white;
+            background: rgba(15, 30, 50, 0.8);
             padding: 30px;
             border-radius: 10px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2), inset 0 0 20px rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .about-section h2 {
-            color: #667eea;
+            color: #00ff88;
             margin-bottom: 15px;
         }
 
         .about-section p {
-            color: #333;
+            color: #d0d0d0;
             line-height: 1.6;
             margin-bottom: 10px;
         }
@@ -79,44 +114,56 @@
         }
 
         .chapter {
-            background: white;
+            background: rgba(15, 30, 50, 0.7);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.15);
             transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .chapter:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
         }
 
         .chapter-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #004d4d 0%, #003d5c 100%);
+            color: #00ff88;
             padding: 20px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             user-select: none;
+            border-left: 4px solid #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
         }
 
         .chapter-header:hover {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            background: linear-gradient(135deg, #005566 0%, #004477 100%);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
         }
 
         .chapter-header h3 {
             font-size: 1.2rem;
             margin: 0;
+            color: #00ffff;
         }
 
         .chapter-number {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 255, 136, 0.2);
             padding: 5px 12px;
             border-radius: 20px;
             font-weight: bold;
             font-size: 0.9rem;
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.5);
         }
 
         .toggle-icon {
             font-size: 1.5rem;
             transition: transform 0.3s ease;
+            color: #00ff88;
         }
 
         .chapter.expanded .toggle-icon {
@@ -128,6 +175,7 @@
             overflow: hidden;
             transition: max-height 0.3s ease;
             padding: 0 20px;
+            color: #d0d0d0;
         }
 
         .chapter.expanded .chapter-content {
@@ -136,7 +184,7 @@
         }
 
         .chapter-description {
-            color: #333;
+            color: #a0d0ff;
             margin-bottom: 20px;
             line-height: 1.6;
             font-style: italic;
@@ -147,7 +195,7 @@
         }
 
         .parts-list h4 {
-            color: #667eea;
+            color: #00ff88;
             margin-bottom: 10px;
             font-size: 1rem;
         }
@@ -158,52 +206,53 @@
         }
 
         .parts-list li {
-            color: #555;
+            color: #b0b0b0;
             margin-bottom: 5px;
             padding-left: 20px;
             position: relative;
         }
 
         .parts-list li:before {
-            content: "→";
+            content: "⚡";
             position: absolute;
             left: 0;
-            color: #667eea;
+            color: #00ff88;
         }
 
         .projects-in-chapter {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
+            background: rgba(0, 255, 136, 0.05);
+            border-left: 4px solid #00ff88;
             padding: 15px;
             border-radius: 5px;
             margin-top: 15px;
         }
 
         .projects-in-chapter h5 {
-            color: #667eea;
+            color: #00ff88;
             margin-bottom: 10px;
         }
 
         .project-item {
-            background: white;
+            background: rgba(15, 30, 50, 0.5);
             padding: 12px;
             margin-bottom: 8px;
             border-radius: 5px;
-            border-left: 3px solid #667eea;
+            border-left: 3px solid #00ff88;
         }
 
         .project-item.completed {
-            border-left-color: #28a745;
+            border-left-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
         }
 
         .project-name {
-            color: #333;
+            color: #00ffff;
             font-weight: 500;
         }
 
         .project-description {
             font-size: 0.9rem;
-            color: #666;
+            color: #a0a0a0;
             margin-top: 5px;
         }
 
@@ -217,62 +266,71 @@
         }
 
         .status-planned {
-            background: #fff3cd;
-            color: #856404;
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.5);
         }
 
         .status-completed {
-            background: #d1e7dd;
-            color: #0f5132;
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.5);
         }
 
         .status-in-progress {
-            background: #cfe2ff;
-            color: #084298;
+            background: rgba(33, 150, 243, 0.2);
+            color: #00d9ff;
+            border: 1px solid rgba(33, 150, 243, 0.5);
         }
 
         .tutorial-link {
             display: inline-block;
-            background: #667eea;
-            color: white;
+            background: rgba(0, 255, 136, 0.15);
+            color: #00ff88;
             padding: 8px 12px;
             border-radius: 5px;
             text-decoration: none;
             font-size: 0.85rem;
             margin-top: 10px;
             transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 136, 0.3);
         }
 
         .tutorial-link:hover {
-            background: #764ba2;
-            transform: scale(1.05);
+            background: rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
         }
 
         .featured-badge {
-            background: #ffd700;
-            color: #333;
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
             padding: 3px 8px;
             border-radius: 3px;
             font-size: 0.75rem;
             font-weight: bold;
             margin-left: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.4);
         }
 
         footer {
             text-align: center;
-            color: white;
+            color: #00d9ff;
             padding: 20px;
             opacity: 0.9;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            margin-top: 50px;
         }
 
         footer a {
-            color: white;
+            color: #00ff88;
             text-decoration: none;
             margin: 0 10px;
+            transition: all 0.3s ease;
         }
 
         footer a:hover {
-            text-decoration: underline;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
         }
     </style>
 </head>
