@@ -257,6 +257,35 @@
             margin-top: 5px;
         }
 
+        .project-troubleshooting {
+            margin-top: 10px;
+            padding: 10px;
+            border-left: 3px solid #00d9ff;
+            background: rgba(0, 217, 255, 0.08);
+            border-radius: 4px;
+        }
+
+        .project-troubleshooting h6 {
+            color: #00d9ff;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .project-troubleshooting ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .project-troubleshooting li {
+            color: #b8dceb;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
         .project-status {
             display: inline-block;
             padding: 4px 12px;
@@ -695,6 +724,11 @@
                         status: "completed",
                         description: "Connect to cloud services and fetch data from web APIs.",
                         video: "https://www.youtube.com/post/UgkxvhTs0TzN3T6Y9rMQih1jMn10atsQtq2a",
+                        troubleshooting: [
+                            "If API requests fail, verify your Wi-Fi SSID/password and internet access.",
+                            "Double-check the API endpoint, API key, and HTTP vs HTTPS requirements.",
+                            "If parsing fails, print and inspect the raw JSON response before extracting fields."
+                        ],
                         featured: false
                     }
                 ],
@@ -717,11 +751,20 @@
                         const statusClass = project.status === 'completed' ? 'status-completed' : 'status-planned';
                         const badge = project.featured ? '<span class="featured-badge">⭐ FEATURED</span>' : '';
                         const videoLink = project.video ? `<a href="${project.video}" target="_blank" class="tutorial-link">📹 Watch on YouTube</a>` : '';
+                        let troubleshootingHtml = '';
+                        if (project.troubleshooting && project.troubleshooting.length > 0) {
+                            troubleshootingHtml = '<div class="project-troubleshooting"><h6>Troubleshooting</h6><ul>';
+                            project.troubleshooting.forEach(item => {
+                                troubleshootingHtml += `<li>• ${item}</li>`;
+                            });
+                            troubleshootingHtml += '</ul></div>';
+                        }
                         projectsHtml += `
                             <div class="project-item ${project.status}">
                                 <div style="flex: 1;">
                                     <div class="project-name">${project.name}${badge}</div>
                                     <div class="project-description">${project.description}</div>
+                                    ${troubleshootingHtml}
                                     ${videoLink}
                                 </div>
                                 <span class="project-status ${statusClass}">${project.status === 'completed' ? '✓' : '○'}</span>
