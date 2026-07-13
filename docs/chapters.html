@@ -669,26 +669,32 @@
             {
                 number: 17,
                 title: "Wi-Fi and the Cloud",
-                description: "Connect your Arduino to Wi-Fi networks and interact with cloud services.",
+                description: "Connect your Arduino to Wi-Fi networks and interact with cloud services using the Adafruit Feather M0.",
                 parts: [
                     "Adafruit Feather M0 Wi-Fi w/ATWINC1500 (soldered w/ PCB antenna)",
                     "USB cable (Type A to Micro-B)",
-                    "Breadboard and jumper wires",
+                    "Half-size or full-size breadboard",
+                    "Assorted jumper wires",
                     "220Ω resistors (×4)",
                     "4.7kΩ resistors (×2)",
                     "5mm common-anode RGB LED",
                     "Piezo buzzer",
-                    "5V 1A USB port wall power supply",
-                    "4-digit 7-segment display with I2C backpack (1.2 inch or 0.56 inch)",
-                    "Wi-Fi network credentials"
+                    "5V 1A USB port wall power supply (optional)",
+                    "4-digit 7-segment display with I2C backpack (1.2 inch or 0.56 inch, any color)",
+                    "Wi-Fi network credentials (and optionally, router administrator access)"
                 ],
                 projects: [
                     {
-                        name: "7-Segment Display Digital Clock",
+                        name: "Wi-Fi LAN Arduino Control",
                         status: "completed",
-                        description: "The culmination of the learning journey! Control 7-segment LED displays to create a fully functional digital clock.",
-                        video: "https://www.youtube.com/post/UgkxvhTs0TzN3T6Y9rMQih1jMn10atsQtq2a",
-                        featured: true
+                        description: "Control your Arduino from your home network via Wi-Fi.",
+                        featured: false
+                    },
+                    {
+                        name: "Interfacing with a Web API",
+                        status: "completed",
+                        description: "Connect to cloud services and fetch data from web APIs.",
+                        featured: false
                     }
                 ],
                 tutorial: "https://www.exploringarduino.com/content2/ch17/"
