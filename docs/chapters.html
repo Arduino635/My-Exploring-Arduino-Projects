@@ -482,11 +482,8 @@
                     {
                         name: "Roving Robot",
                         status: "completed",
-                        description: "Build and drive a light-following roving robot using transistors, sensors, and an L293D H-Bridge motor driver. The diagram below explains the Open, Forward, Backward, and Braking states.",
-                        image: "images/ch4-hbridge-modes.png",
-                        imageAlt: "H-bridge motor states: Open, Forward, Backward, and Braking",
+                        description: "Build and drive a light-following roving robot using transistors, sensors, and an L293D H-Bridge motor driver.",
                         troubleshooting: [
-                            "Use the H-bridge modes diagram to verify expected behavior: Open = coast, Forward/Backward = direction control, Braking = rapid stop.",
                             "If motors do not spin, verify motor supply voltage, common ground with the Arduino, and L293D enable pins are set HIGH.",
                             "If one wheel spins backward, swap that motor's polarity at the L293D output pins.",
                             "If the robot resets when motors start, separate noisy motor power from logic power and check regulator/capacitor wiring."
@@ -523,7 +520,30 @@
                     "If the servo twitches or resets the board, use a stable external 5V supply and connect its ground to Arduino GND.",
                     "If motion is reversed or inconsistent, check pin assignments in code and lower speed/acceleration values for testing."
                 ],
-                projects: [],
+                projects: [
+                    {
+                        name: "Servo Sweep and Position Control",
+                        status: "completed",
+                        description: "Drive a standard servo through smooth sweeps and fixed-angle position targets using a potentiometer.",
+                        troubleshooting: [
+                            "If the servo chatters, power it from a stable 5V source and tie that supply ground to Arduino GND.",
+                            "If angle movement is limited or inverted, recheck `map()` bounds and confirm the correct control pin.",
+                            "If behavior is jerky, slow the update interval and avoid blocking delays in the control loop."
+                        ],
+                        featured: false
+                    },
+                    {
+                        name: "Stepper Direction and Speed Control",
+                        status: "completed",
+                        description: "Control a bipolar stepper motor direction and speed with the L293D driver and button inputs.",
+                        troubleshooting: [
+                            "If the stepper only vibrates, identify and reconnect correct coil pairs before testing sequence timing.",
+                            "If torque is weak, verify motor voltage/current capability and reduce step rate at startup.",
+                            "If direction commands seem random, debounce button inputs or add simple software filtering."
+                        ],
+                        featured: false
+                    }
+                ],
                 tutorial: "https://www.exploringarduino.com/content2/ch5/"
             },
             {
