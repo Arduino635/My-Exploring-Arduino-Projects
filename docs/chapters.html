@@ -482,8 +482,11 @@
                     {
                         name: "Roving Robot",
                         status: "completed",
-                        description: "Build and drive a light-following roving robot using transistors, sensors, and an L293D H-Bridge motor driver.",
+                        description: "Build and drive a light-following roving robot using transistors, sensors, and an L293D H-Bridge motor driver. The diagram below explains the Open, Forward, Backward, and Braking states.",
+                        image: "images/ch4-hbridge-modes.png",
+                        imageAlt: "H-bridge motor states: Open, Forward, Backward, and Braking",
                         troubleshooting: [
+                            "Use the H-bridge modes diagram to verify expected behavior: Open = coast, Forward/Backward = direction control, Braking = rapid stop.",
                             "If motors do not spin, verify motor supply voltage, common ground with the Arduino, and L293D enable pins are set HIGH.",
                             "If one wheel spins backward, swap that motor's polarity at the L293D output pins.",
                             "If the robot resets when motors start, separate noisy motor power from logic power and check regulator/capacitor wiring."
