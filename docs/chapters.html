@@ -257,6 +257,20 @@
             margin-top: 5px;
         }
 
+        .project-image {
+            margin-top: 10px;
+            border: 1px solid rgba(0, 217, 255, 0.35);
+            border-radius: 6px;
+            overflow: hidden;
+            background: rgba(0, 217, 255, 0.05);
+        }
+
+        .project-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
         .project-troubleshooting {
             margin-top: 10px;
             padding: 10px;
@@ -469,6 +483,8 @@
                         name: "Roving Robot",
                         status: "completed",
                         description: "Build and drive a light-following roving robot using transistors, sensors, and an L293D H-Bridge motor driver.",
+                        image: "images/ch4-roving-robot-wiring.png",
+                        imageAlt: "Roving Robot Chapter 4 wiring diagram",
                         troubleshooting: [
                             "If motors do not spin, verify motor supply voltage, common ground with the Arduino, and L293D enable pins are set HIGH.",
                             "If one wheel spins backward, swap that motor's polarity at the L293D output pins.",
@@ -768,6 +784,9 @@
                         const statusClass = project.status === 'completed' ? 'status-completed' : 'status-planned';
                         const badge = project.featured ? '<span class="featured-badge">⭐ FEATURED</span>' : '';
                         const videoLink = project.video ? `<a href="${project.video}" target="_blank" class="tutorial-link">📹 Watch on YouTube</a>` : '';
+                        const projectImage = project.image
+                            ? `<div class="project-image"><img src="${project.image}" alt="${project.imageAlt || project.name}" loading="lazy"></div>`
+                            : '';
                         let troubleshootingHtml = '';
                         if (project.troubleshooting && project.troubleshooting.length > 0) {
                             troubleshootingHtml = '<div class="project-troubleshooting"><h6>Troubleshooting</h6><ul>';
@@ -781,6 +800,7 @@
                                 <div style="flex: 1;">
                                     <div class="project-name">${project.name}${badge}</div>
                                     <div class="project-description">${project.description}</div>
+                                    ${projectImage}
                                     ${troubleshootingHtml}
                                     ${videoLink}
                                 </div>
