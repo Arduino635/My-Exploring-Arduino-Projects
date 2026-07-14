@@ -434,6 +434,11 @@
                     "5mm white LED",
                     "5mm common-anode RGB LED"
                 ],
+                troubleshooting: [
+                    "If readings jump around, verify all sensor grounds are connected to Arduino GND and jumper wires are firmly seated.",
+                    "For noisy analog values, average multiple readings in code and keep signal wires short.",
+                    "If TMP36 temperature values look wrong, confirm the pin order and use the correct voltage conversion formula."
+                ],
                 projects: [],
                 tutorial: "https://www.exploringarduino.com/content2/ch3/"
             },
@@ -783,6 +788,15 @@
                     partsHtml += '</ul></div>';
                 }
 
+                let chapterTroubleshootingHtml = '';
+                if (chapter.troubleshooting && chapter.troubleshooting.length > 0) {
+                    chapterTroubleshootingHtml = '<div class="project-troubleshooting"><h6>Troubleshooting</h6><ul>';
+                    chapter.troubleshooting.forEach(item => {
+                        chapterTroubleshootingHtml += `<li>• ${item}</li>`;
+                    });
+                    chapterTroubleshootingHtml += '</ul></div>';
+                }
+
                 let tutorialHtml = '';
                 if (chapter.tutorial) {
                     tutorialHtml = `<a href="${chapter.tutorial}" target="_blank" class="tutorial-link">📺 View Tutorial</a>`;
@@ -799,6 +813,7 @@
                     <div class="chapter-content">
                         <p class="chapter-description">${chapter.description}</p>
                         ${partsHtml}
+                        ${chapterTroubleshootingHtml}
                         ${projectsHtml}
                         ${tutorialHtml}
                     </div>
