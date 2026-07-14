@@ -485,6 +485,8 @@
                         description: "Build and drive a light-following roving robot using transistors, sensors, and an L293D H-Bridge motor driver.",
                         image: "images/ch4-roving-robot-wiring.png",
                         imageAlt: "Roving Robot Chapter 4 wiring diagram",
+                        image2: "images/ch4-roving-robot-build-photo.png",
+                        imageAlt2: "Roving Robot real build photo",
                         troubleshooting: [
                             "If motors do not spin, verify motor supply voltage, common ground with the Arduino, and L293D enable pins are set HIGH.",
                             "If one wheel spins backward, swap that motor's polarity at the L293D output pins.",
@@ -784,9 +786,13 @@
                         const statusClass = project.status === 'completed' ? 'status-completed' : 'status-planned';
                         const badge = project.featured ? '<span class="featured-badge">⭐ FEATURED</span>' : '';
                         const videoLink = project.video ? `<a href="${project.video}" target="_blank" class="tutorial-link">📹 Watch on YouTube</a>` : '';
-                        const projectImage = project.image
-                            ? `<div class="project-image"><img src="${project.image}" alt="${project.imageAlt || project.name}" loading="lazy"></div>`
-                            : '';
+                        const imageEntries = [
+                            { src: project.image, alt: project.imageAlt || project.name },
+                            { src: project.image2, alt: project.imageAlt2 || `${project.name} photo` }
+                        ].filter(entry => entry.src);
+                        const projectImage = imageEntries
+                            .map(entry => `<div class="project-image"><img src="${entry.src}" alt="${entry.alt}" loading="lazy"></div>`)
+                            .join('');
                         let troubleshootingHtml = '';
                         if (project.troubleshooting && project.troubleshooting.length > 0) {
                             troubleshootingHtml = '<div class="project-troubleshooting"><h6>Troubleshooting</h6><ul>';
