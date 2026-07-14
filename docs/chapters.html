@@ -464,7 +464,19 @@
                     "9V DC motor",
                     "TI L293D dual H-bridge motor driver"
                 ],
-                projects: [],
+                projects: [
+                    {
+                        name: "Roving Robot",
+                        status: "completed",
+                        description: "Build and drive a light-following roving robot using transistors, sensors, and an L293D motor driver.",
+                        troubleshooting: [
+                            "If motors do not spin, verify motor supply voltage, common ground with the Arduino, and L293D enable pins are set HIGH.",
+                            "If one wheel spins backward, swap that motor's polarity at the L293D output pins.",
+                            "If the robot resets when motors start, separate noisy motor power from logic power and check regulator/capacitor wiring."
+                        ],
+                        featured: false
+                    }
+                ],
                 tutorial: "https://www.exploringarduino.com/content2/ch4/"
             },
             {
