@@ -783,6 +783,7 @@
                         status: "completed",
                         description: "Connect to cloud services and fetch data from web APIs.",
                         video: "https://www.youtube.com/post/UgkxvhTs0TzN3T6Y9rMQih1jMn10atsQtq2a",
+                        code: "https://github.com/Arduino635/My-Exploring-Arduino-Projects/blob/main/explore_arduino_code/sketch_mar21a/sketch_mar21a.ino",
                         troubleshooting: [
                             "Ensure everything is soldered on correctly and securely.",
                             "Double-check the API endpoint, API key, and HTTP vs HTTPS requirements.",
@@ -810,6 +811,7 @@
                         const statusClass = project.status === 'completed' ? 'status-completed' : 'status-planned';
                         const badge = project.featured ? '<span class="featured-badge">⭐ FEATURED</span>' : '';
                         const videoLink = project.video ? `<a href="${project.video}" target="_blank" class="tutorial-link">📹 Watch on YouTube</a>` : '';
+                        const codeLink = project.code ? `<a href="${project.code}" target="_blank" class="tutorial-link">💻 View sketch_mar21a code</a>` : '';
                         const imageEntries = [
                             { src: project.image, alt: project.imageAlt || project.name },
                             { src: project.image2, alt: project.imageAlt2 || `${project.name} photo` }
@@ -833,6 +835,7 @@
                                     ${projectImage}
                                     ${troubleshootingHtml}
                                     ${videoLink}
+                                    ${codeLink}
                                 </div>
                                 <span class="project-status ${statusClass}">${project.status === 'completed' ? '✓' : '○'}</span>
                             </div>
