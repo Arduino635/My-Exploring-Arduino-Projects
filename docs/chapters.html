@@ -803,6 +803,11 @@
             chapters.forEach(chapter => {
                 const chapterEl = document.createElement('div');
                 chapterEl.className = 'chapter';
+
+                const chapterCodeProject = chapter.projects.find(project => project.code);
+                const chapterCodeLink = chapterCodeProject
+                    ? `<a href="${chapterCodeProject.code}" target="_blank" class="tutorial-link">💻 View sketch_mar21a code</a>`
+                    : '';
                 
                 let projectsHtml = '';
                 if (chapter.projects.length > 0) {
@@ -811,7 +816,6 @@
                         const statusClass = project.status === 'completed' ? 'status-completed' : 'status-planned';
                         const badge = project.featured ? '<span class="featured-badge">⭐ FEATURED</span>' : '';
                         const videoLink = project.video ? `<a href="${project.video}" target="_blank" class="tutorial-link">📹 Watch on YouTube</a>` : '';
-                        const codeLink = project.code ? `<a href="${project.code}" target="_blank" class="tutorial-link">💻 View sketch_mar21a code</a>` : '';
                         const imageEntries = [
                             { src: project.image, alt: project.imageAlt || project.name },
                             { src: project.image2, alt: project.imageAlt2 || `${project.name} photo` }
@@ -835,7 +839,6 @@
                                     ${projectImage}
                                     ${troubleshootingHtml}
                                     ${videoLink}
-                                    ${codeLink}
                                 </div>
                                 <span class="project-status ${statusClass}">${project.status === 'completed' ? '✓' : '○'}</span>
                             </div>
@@ -851,6 +854,16 @@
                         partsHtml += `<li>${part}</li>`;
                     });
                     partsHtml += '</ul></div>';
+                }
+
+                let partsAndCodeHtml = partsHtml;
+                if (chapter.number === 17 && chapterCodeLink) {
+                    partsAndCodeHtml = `
+                        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start;">
+                            ${partsHtml}
+                            <div style="padding-top: 28px;">${chapterCodeLink}</div>
+                        </div>
+                    `;
                 }
 
                 let chapterTroubleshootingHtml = '';
@@ -877,7 +890,7 @@
                     </div>
                     <div class="chapter-content">
                         <p class="chapter-description">${chapter.description}</p>
-                        ${partsHtml}
+                        ${partsAndCodeHtml}
                         ${chapterTroubleshootingHtml}
                         ${projectsHtml}
                         ${tutorialHtml}
